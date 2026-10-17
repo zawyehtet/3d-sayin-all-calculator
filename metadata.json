@@ -1,0 +1,6 @@
+{
+  "name": "ငွေစာရင်းတွက်ချက်မှု",
+  "description": "မြန်မာ ယူနီကုဒ် ငွေစာရင်းတွက်ချက်မှု ဆော့ဖ်ဝဲ (ရောင်းငွေ၊ ကော်၊ အပ်ငွေ၊ အကြွေးကျန်၊ အလျော် စာရင်းများ တွက်ချက်ခြင်း)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
