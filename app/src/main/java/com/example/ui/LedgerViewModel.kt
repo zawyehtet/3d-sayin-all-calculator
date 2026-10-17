@@ -18,7 +18,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -257,19 +256,25 @@ class LedgerViewModel(
         savedStateHandle[KEY_APA_MULTIPLIER] = multiplier
     }
 
-    fun saveCurrentCalculation(onComplete: () -> Unit = {}) {
+    fun saveCurrentCalculation(onSaved: () -> Unit = {}) {
+        val currentUiState = uiState.value
+        val input = currentUiState.input
+        val calc = currentUiState.calculation
+        val summary = currentUiState.summaryText
+
+        if (summary.isBlank() && calc.finalDisplayTotal.isBlank()) return
+
+        val dateDisplay = input.date?.toString() ?: ""
         viewModelScope.launch {
-            val currentState = uiState.value
-            val dateStr = currentState.input.date?.format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yy")) ?: ""
             historyRepository.save(
-                round = currentState.input.round,
-                name = currentState.input.name,
-                dateText = dateStr,
-                finalTotal = currentState.calculation.finalDisplayTotal,
-                sign = currentState.calculation.sign,
-                summaryText = currentState.summaryText
+                round = input.round,
+                name = input.name,
+                dateText = dateDisplay,
+                finalTotal = calc.finalDisplayTotal,
+                sign = calc.sign,
+                summaryText = summary
             )
-            onComplete()
+            onSaved()
         }
     }
 
@@ -286,21 +291,26 @@ class LedgerViewModel(
     }
 
     fun reset() {
-        savedStateHandle[KEY_DATE] = null
-        savedStateHandle[KEY_AM_PM] = null
-        savedStateHandle[KEY_ROUND] = LedgerConstants.ROUND_OPTIONS.first()
+        clearAllInputs()
+    }
+
+    fun clearAllInputs() {
         savedStateHandle[KEY_NAME] = ""
         savedStateHandle[KEY_SALES] = ""
-        savedStateHandle[KEY_RATE] = 0.25
         savedStateHandle[KEY_DEBT] = ""
         savedStateHandle[KEY_LUMP] = ""
         savedStateHandle[KEY_DAE_AMOUNT] = ""
-        savedStateHandle[KEY_DAE_MULTIPLIER] = LedgerConstants.DAE_MULTIPLIERS.first()
         savedStateHandle[KEY_THWAD_AMOUNT] = ""
         savedStateHandle[KEY_APA_AMOUNT] = ""
+        savedStateHandle[KEY_DATE] = null
+        savedStateHandle[KEY_AM_PM] = null
+        savedStateHandle[KEY_ROUND] = LedgerConstants.ROUND_OPTIONS.first()
+        savedStateHandle[KEY_RATE] = 0.25
+        savedStateHandle[KEY_DAE_MULTIPLIER] = LedgerConstants.DAE_MULTIPLIERS.first()
         savedStateHandle[KEY_APA_MULTIPLIER] = LedgerConstants.APA_MULTIPLIERS.first()
     }
 }
 
-private data class Tuple5<A, B, C, D, E>(val a: A, val b: B, val c: C, val d: D, val e: E)
+// Helpers for combine with 4 and 5 items
 private data class Tuple4<A, B, C, D>(val a: A, val b: B, val c: C, val d: D)
+private data class Tuple5<A, B, C, D, E>(val a: A, val b: B, val c: C, val d: D, val e: E)

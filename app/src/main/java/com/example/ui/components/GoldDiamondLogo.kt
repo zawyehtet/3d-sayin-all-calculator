@@ -20,41 +20,35 @@ import androidx.compose.ui.unit.sp
 import com.example.R
 
 /**
- * Gold logo for "ShweKhinMyay".
- *
- * TO SWAP IN YOUR OWN LOGO:
- * 1. Place your drawable in `res/drawable/your_logo_name.png` (or `.xml`)
- * 2. Pass `logoRes = R.drawable.your_logo_name` when calling this composable,
- *    or replace R.drawable.ic_gold_diamond below.
+ * Clover brand logo for "ShweKhinMyay" using the reference 4-leaf pixel clover.
  */
 @Composable
 fun ShweKhinMyayLogo(
     modifier: Modifier = Modifier,
-    @DrawableRes logoRes: Int = R.drawable.ic_gold_diamond
+    @DrawableRes logoRes: Int = R.drawable.ic_clover
 ) {
-    val goldBrush = Brush.linearGradient(
+    val emeraldBrush = Brush.linearGradient(
         colors = listOf(
-            Color(0xFFFFE082),
-            Color(0xFFFFB300),
-            Color(0xFFFF8F00),
-            Color(0xFFFFD54F)
+            Color(0xFF8EE378),
+            Color(0xFF4CAF50),
+            Color(0xFF2E7D32)
         )
     )
 
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Image(
             painter = painterResource(id = logoRes),
-            contentDescription = "ShweKhinMyay Diamond Logo",
-            modifier = Modifier.size(20.dp)
+            contentDescription = "Clover Logo",
+            modifier = Modifier.size(26.dp)
         )
         Text(
             text = "ShweKhinMyay",
             style = TextStyle(
-                brush = goldBrush,
+                brush = emeraldBrush,
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.Bold,
                 fontSize = 15.sp,

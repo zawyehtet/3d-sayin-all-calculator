@@ -1,40 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    <group
-        android:translateX="22"
-        android:translateY="22">
-        <!-- Scale 64x64 into center of 108dp -->
-        <!-- Gold Diamond Silhouette & Facets -->
-        <!-- Crown Facets -->
-        <path
-            android:fillColor="#FFE082"
-            android:pathData="M18,10 L46,10 L41,22 L23,22 Z" />
-        <path
-            android:fillColor="#FFD54F"
-            android:pathData="M6,22 L18,10 L23,22 Z" />
-        <path
-            android:fillColor="#FFCA28"
-            android:pathData="M46,10 L58,22 L41,22 Z" />
-        <!-- Pavilion Facets -->
-        <path
-            android:fillColor="#FFB300"
-            android:pathData="M6,22 L23,22 L32,54 Z" />
-        <path
-            android:fillColor="#FFC107"
-            android:pathData="M23,22 L41,22 L32,54 Z" />
-        <path
-            android:fillColor="#FFA000"
-            android:pathData="M41,22 L58,22 L32,54 Z" />
-        <!-- Clean inner accounting balance emblem lines -->
-        <path
-            android:fillColor="#00000000"
-            android:strokeColor="#FFFFFF"
-            android:strokeWidth="1.8"
-            android:strokeLineCap="round"
-            android:pathData="M22,30 L42,30 M25,36 L39,36 M28,42 L36,42" />
-    </group>
-</vector>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="64dp"
+        android:height="64dp"
+        android:gravity="center"
+        android:drawable="@drawable/ic_clover" />
+</layer-list>

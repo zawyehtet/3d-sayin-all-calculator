@@ -44,6 +44,7 @@ class LockManager(context: Context) {
 
     /**
      * Verifies if the entered PIN matches the saved PIN (supports Arabic and Burmese numerals).
+     * Default PIN is 7777.
      */
     fun verifyPin(enteredPin: String): Boolean {
         val normalized = convertBurmeseToArabicDigits(enteredPin).trim()

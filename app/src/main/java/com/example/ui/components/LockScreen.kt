@@ -14,9 +14,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -31,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
@@ -60,24 +60,27 @@ fun LockScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 32.dp),
+                .safeDrawingPadding()
+                .imePadding()
+                .padding(horizontal = 24.dp, vertical = 28.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Header / Brand
+            // Header / Brand with new clover logo
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                // New 4-leaf clover logo
                 ShweKhinMyayLogo(
-                    modifier = Modifier.padding(top = 16.dp)
+                    modifier = Modifier.padding(top = 8.dp)
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(14.dp))
 
                 Box(
                     modifier = Modifier
-                        .size(72.dp)
+                        .size(68.dp)
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.primaryContainer),
                     contentAlignment = Alignment.Center
@@ -86,11 +89,11 @@ fun LockScreen(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "App Locked",
                         tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(36.dp)
+                        modifier = Modifier.size(34.dp)
                     )
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
                     text = "လျှို့ဝှက်ကုဒ် ထည့်သွင်းပါ",
@@ -100,12 +103,7 @@ fun LockScreen(
                     )
                 )
 
-                Text(
-                    text = "မူလ လျှို့ဝှက်နံပါတ်: 7777",
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        color = MaterialTheme.colorScheme.outline
-                    )
-                )
+                // Note: The text "မူလ လျှို့ဝှက်နံပါတ်: 7777" has been removed as requested.
 
                 // Error message
                 AnimatedVisibility(
@@ -125,7 +123,7 @@ fun LockScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(14.dp))
 
                 // 4 PIN Dots Indicator
                 Row(
@@ -160,7 +158,7 @@ fun LockScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
+                    .padding(bottom = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
